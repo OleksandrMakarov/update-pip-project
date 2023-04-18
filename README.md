@@ -42,6 +42,9 @@ The tests cover various aspects of the script, including the following:
 - [distro](https://pypi.org/project/distro/)
 
 ## Installation
+From [PyPi.org](https://pypi.org/project/update-pip-packages/)
+
+In Linux:
 ```
 pip install update-pip-packages
 ```
@@ -54,5 +57,5 @@ python3 -m pip install update-pip-packages
 For more information, source code, and installation instructions, please visit the GitHub repository: [GitHub: update-pip-packages](https://github.com/OleksandrMakarov/update-pip-project)
 
 ## Remarks
-There is also a [bash script](https://github.com/OleksandrMakarov/update-pip-project/blob/main/update_packages.sh), I started with it and developed it into this Python project. 
+There is also a [bash script](https://github.com/OleksandrMakarov/update-pip-project/blob/main/update_packages.sh). I started with it and developed it into this Python project. 
 It does not support Linux distribution detection, but you can use it for the same purposes as the main(python) application in a Debian or Ubuntu environment.
