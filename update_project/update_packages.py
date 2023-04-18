@@ -146,7 +146,7 @@ def main() -> None:
         sys.exit(1)
 
     if args.version:
-        version = "0.1.2"
+        version = "0.1.3"
         print(f"update-pip-packages version: {version}")
         sys.exit(0)
 

@@ -22,6 +22,7 @@ update-pip-packages [--pip] [--app]
 - -h, --help: Show this help message and exit
 - --pip: Update Pip packages.
 - --app: Update app packages.
+- -v, --version: Display the version of the package
 - If no options are provided, the script will display help information.
 
 ## Tests
@@ -50,8 +51,8 @@ python3 -m pip install update-pip-packages
 ```
 
 ## GitHub Repository
-For more information, source code, and installation instructions, please visit the GitHub repository: [GitHub: update_packages](https://github.com/OleksandrMakarov/Scripts/tree/main/update-pip-project)
+For more information, source code, and installation instructions, please visit the GitHub repository: [GitHub: update-pip-packages](https://github.com/OleksandrMakarov/update-pip-project)
 
 ## Remarks
-There is also a [bash script](https://github.com/OleksandrMakarov/Scripts/tree/main/update-pip-project/update_packages.sh), I started with it and developed it into this Python project. 
+There is also a [bash script](https://github.com/OleksandrMakarov/update-pip-project/blob/main/update_packages.sh), I started with it and developed it into this Python project. 
 It does not support Linux distribution detection, but you can use it for the same purposes as the main(python) application in a Debian or Ubuntu environment.
