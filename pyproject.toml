@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "update-pip-packages"
-version = "0.1.3"
+version = "0.1.4"
 description = ""
 authors = ["OleksandrMakarov"]
 readme = "README.md"
@@ -9,6 +9,7 @@ packages = [{include = "update_project"}]
 [tool.poetry.dependencies]
 python = "^3.10"
 distro = "^1.8.0"
+toml = "^0.10.2"
 
 [tool.poetry.scripts]
 update-pip-packages = "update_project.update_packages:main"
