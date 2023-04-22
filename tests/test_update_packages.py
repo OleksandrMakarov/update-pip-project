@@ -21,7 +21,7 @@ def test_get_linux_distribution(monkeypatch):
 def test_update_pip_packages(monkeypatch):
     check_output_mock = MagicMock(
         side_effect=[
-            b"pip 21.0.1",
+            b"pip 20.0.1",
             json.dumps([{"name": "package1", "latest_version": "2.0.0"}]).encode(),
         ]
     )
