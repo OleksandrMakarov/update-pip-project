@@ -1,7 +1,7 @@
 import pytest
 import json
 from unittest.mock import MagicMock
-from update_project.update_packages import (
+from update_project.main import (
     get_linux_distribution,
     update_pip_packages,
     update_apt_packages,
@@ -16,7 +16,7 @@ from update_project.update_packages import (
 
 def test_get_linux_distribution(monkeypatch):
     monkeypatch.setattr(
-        "update_project.update_packages.distro.id", lambda: "ubuntu")
+        "update_project.main.distro.id", lambda: "ubuntu")
     assert get_linux_distribution() == "ubuntu"
 
 
@@ -30,9 +30,9 @@ def test_update_pip_packages(monkeypatch):
     )
     check_call_mock = MagicMock()
     monkeypatch.setattr(
-        "update_project.update_packages.subprocess.check_output", check_output_mock)
+        "update_project.main.subprocess.check_output", check_output_mock)
     monkeypatch.setattr(
-        "update_project.update_packages.subprocess.check_call", check_call_mock)
+        "update_project.main.subprocess.check_call", check_call_mock)
 
     class MockResponse:
         def __init__(self, url):
@@ -48,7 +48,7 @@ def test_update_pip_packages(monkeypatch):
             return json.dumps(self.data).encode()
 
     monkeypatch.setattr(
-        "update_project.update_packages.urllib.request.urlopen", lambda url: MockResponse(url))
+        "update_project.main.urllib.request.urlopen", lambda url: MockResponse(url))
 
     update_pip_packages()
 
@@ -72,9 +72,9 @@ def test_update_pip_packages(monkeypatch):
 )
 def test_update_app_packages(monkeypatch, distro_id, update_func):
     monkeypatch.setattr(
-        "update_project.update_packages.get_linux_distribution", lambda: distro_id)
+        "update_project.main.get_linux_distribution", lambda: distro_id)
     update_func_mock = MagicMock()
-    monkeypatch.setattr("update_project.update_packages." +
+    monkeypatch.setattr("update_project.main." +
                         update_func.__name__, update_func_mock)
 
     update_app_packages()
@@ -84,7 +84,7 @@ def test_update_app_packages(monkeypatch, distro_id, update_func):
 
 def test_update_app_packages_unsupported(monkeypatch, capsys):
     monkeypatch.setattr(
-        "update_project.update_packages.get_linux_distribution", lambda: "unsupported")
+        "update_project.main.get_linux_distribution", lambda: "unsupported")
 
     update_app_packages()
 

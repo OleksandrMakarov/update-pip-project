@@ -12,7 +12,7 @@ distro = "^1.8.0"
 toml = "^0.10.2"
 
 [tool.poetry.scripts]
-update-pip-packages = "update_project.update_packages:main"
+update-pip-packages = "update_project.main:main"
 
 
 [tool.poetry.group.dev.dependencies]
