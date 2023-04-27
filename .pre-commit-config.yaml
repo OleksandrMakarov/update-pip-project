@@ -1,9 +1,23 @@
 repos:
--   repo: local
+  - repo: local
     hooks:
-    - id: pytest
-      name: Run pytest
-      entry: poetry run pytest --cov=. -v
-      language: system
-      types: [python]
-      pass_filenames: false
+      - id: pytest
+        name: Run pytest
+        entry: poetry run pytest --cov=update_project -sv
+        language: system
+        types: [python]
+        pass_filenames: false
+
+      - id: flake8
+        name: Run flake8
+        entry: poetry run flake8 tests update_project --count --select=E9,F63,F7,F82 --show-source --statistics
+        language: system
+        types: [python]
+        pass_filenames: false
+
+      - id: flake8_complexity
+        name: Run flake8 with complexity checks
+        entry: poetry run flake8 tests update_project --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+        language: system
+        types: [python]
+        pass_filenames: false
