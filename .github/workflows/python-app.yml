@@ -34,14 +34,8 @@ jobs:
         poetry run flake8 tests update_project --count --select=E9,F63,F7,F82 --show-source --statistics
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         poetry run flake8 tests update_project --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-    - name: Test with pytest
+    - name: Test with pytest and generate coverage report
       run: |
-        poetry run pytest
-    - name: CodeClimate test coverage
-      uses: paambaati/codeclimate-action@v4.0.0
-      env:
-        CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-      with:
         poetry run pytest --cov=update_project --cov-report=xml
     - name: CodeClimate test coverage
       uses: paambaati/codeclimate-action@v4.0.0
