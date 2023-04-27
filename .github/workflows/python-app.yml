@@ -36,7 +36,7 @@ jobs:
         poetry run flake8 tests update_project --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pytest and generate coverage report
       run: |
-        poetry run pytest --cov=update_project --cov-report=xml --cov-report=term
+        poetry run pytest --cov=update_project --cov-report=xml
     - name: CodeClimate test coverage
       uses: paambaati/codeclimate-action@v4.0.0
       env:
