@@ -38,7 +38,7 @@ jobs:
       run: |
         poetry run pytest
     - name: CodeClimate test coverage
-      uses: paambaati/codeclimate-action@v2.2.4
+      uses: paambaati/codeclimate-action@v4.0.0
       env:
         CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
       with:
