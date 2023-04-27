@@ -10,7 +10,7 @@ repos:
 
       - id: flake8
         name: Run flake8
-        entry: poetry run flake8 tests update_project --count --select=E9,F63,F7,F82 --show-source --statistics
+        entry: poetry run flake8 tests update_project --count --show-source --max-line-length=127 --statistics
         language: system
         types: [python]
         pass_filenames: false
