@@ -4,6 +4,7 @@ import subprocess
 import urllib.request
 import argparse
 import distro
+import toml
 
 
 def get_linux_distribution():
@@ -131,6 +132,12 @@ def update_app_packages() -> None:
             f"Unsupported distribution: {distro_id}. Cannot update packages.")
 
 
+def get_version_from_pyproject_toml() -> str:
+    with open("pyproject.toml") as f:
+        pyproject_toml = toml.load(f)
+    return pyproject_toml["tool"]["poetry"]["version"]
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Update pip and app packages")
     parser.add_argument('--pip', action='store_true',
@@ -146,7 +153,7 @@ def main() -> None:
         sys.exit(1)
 
     if args.version:
-        version = "0.1.3"
+        version = get_version_from_pyproject_toml()
         print(f"update-pip-packages version: {version}")
         sys.exit(0)
 
