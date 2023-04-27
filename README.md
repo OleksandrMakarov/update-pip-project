@@ -1,5 +1,10 @@
 # Update Pip and App Packages
+
 ## v0.1.4
+
+![Python application](https://github.com/OleksandrMakarov/update-pip-project/actions/workflows/python-app.yml/badge.svg)
+[![Maintainability](https://api.codeclimate.com/v1/badges/af2bad1ec28de4bea881/maintainability)](https://codeclimate.com/github/OleksandrMakarov/update-pip-project/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/af2bad1ec28de4bea881/test_coverage)](https://codeclimate.com/github/OleksandrMakarov/update-pip-project/test_coverage)
 
 This Python script provides an efficient way to update Pip and app packages on various Linux distributions. The script supports Ubuntu, Debian, Fedora, CentOS, Red Hat, Arch, Manjaro, OpenSUSE, and SUSE distributions. It updates packages using the appropriate package manager for each distribution.
 
