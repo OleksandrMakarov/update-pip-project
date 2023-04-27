@@ -42,6 +42,6 @@ jobs:
       env:
         CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
       with:
-        coverageCommand: echo "Coverage already generated in previous step"
-        coverageFilePath: "coverage.xml"
+        coverageCommand: echo "Coverage already generated"
+        coverageLocations: "coverage.xml"
         debug: "true"
