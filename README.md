@@ -1,6 +1,6 @@
 # Update Pip and App Packages
 
-## v0.1.4
+## v0.1.5
 
 ![Python application](https://github.com/OleksandrMakarov/update-pip-project/actions/workflows/python-app.yml/badge.svg)
 [![Maintainability](https://api.codeclimate.com/v1/badges/af2bad1ec28de4bea881/maintainability)](https://codeclimate.com/github/OleksandrMakarov/update-pip-project/maintainability)
@@ -24,6 +24,7 @@ To use the script, run the following command with the desired options:
 ```bash
 update-pip-packages [--pip] [--app]
 ```
+
 - -h, --help: Show this help message and exit
 - --pip: Update Pip packages.
 - --app: Update app packages.
@@ -31,6 +32,7 @@ update-pip-packages [--pip] [--app]
 - If no options are provided, the script will display help information.
 
 ## Tests
+
 The tests cover various aspects of the script, including the following:
 
 - Getting the Linux distribution.
@@ -38,9 +40,8 @@ The tests cover various aspects of the script, including the following:
 - Updating app packages for each supported Linux distribution.
 - Handling unsupported Linux distributions.
 
-
-
 ## Dependencies
+
 - [Python](https://www.python.org/) 3.6 or later
 - [Poetry](https://python-poetry.org/)
 - [pytest](https://pytest.org/)
@@ -48,20 +49,26 @@ The tests cover various aspects of the script, including the following:
 - [toml](https://pypi.org/project/toml/)
 
 ## Installation
+
 From [PyPi.org](https://pypi.org/project/update-pip-packages/)
 
 In Linux:
-```
+
+```bash
 pip install update-pip-packages
 ```
+
 or
-```
+
+```bash
 python3 -m pip install update-pip-packages
 ```
 
 ## GitHub Repository
+
 For more information, source code, and installation instructions, please visit the GitHub repository: [GitHub: update-pip-packages](https://github.com/OleksandrMakarov/update-pip-project)
 
 ## Remarks
-There is also a [bash script](https://github.com/OleksandrMakarov/update-pip-project/blob/main/update_packages.sh). I started with it and developed it into this Python project. 
+
+There is also a [bash script](https://github.com/OleksandrMakarov/update-pip-project/blob/main/update_packages.sh). I started with it and developed it into this Python project.
 It does not support Linux distribution detection, but you can use it for the same purposes as the main(python) application in a Debian or Ubuntu environment.
