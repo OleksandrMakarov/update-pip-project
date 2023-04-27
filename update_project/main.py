@@ -137,6 +137,7 @@ def get_version_from_pyproject_toml() -> str:
         pyproject_toml = toml.load(f)
     return pyproject_toml["tool"]["poetry"]["version"]
 
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Update pip and app packages")
     parser.add_argument('--pip', action='store_true',
