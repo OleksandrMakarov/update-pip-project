@@ -39,11 +39,9 @@ def update_pip_packages() -> None:
     else:
         print("Updating pip packages...")
         for package in packages_to_update:
-            update_result = run_command(
+            run_command(
                 [sys.executable, "-m", "pip", "install", "--upgrade", package],
+                success_msg=f"{package} updated successfully.",
+                error_msg=f"Error updating {package}.",
             )
-            if update_result.returncode == 0:
-                print(f"{package} updated successfully.\n")
-            else:
-                print(f"Error updating {package}. Return {update_result.stderr}")
         print("Pip packages update completed.")
