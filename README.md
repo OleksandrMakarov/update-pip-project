@@ -46,7 +46,6 @@ The tests cover various aspects of the script, including the following:
 - [Poetry](https://python-poetry.org/)
 - [pytest](https://pytest.org/)
 - [distro](https://pypi.org/project/distro/)
-- [toml](https://pypi.org/project/toml/)
 
 ## Installation
 
