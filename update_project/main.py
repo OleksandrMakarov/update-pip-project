@@ -2,7 +2,8 @@ import sys
 import argparse
 from update_project.update_app import update_app_packages
 from update_project.update_pip import update_pip_packages
-from update_project.utils import get_project_version
+# from update_project.utils import get_project_version
+from . import __version__
 
 
 def main() -> None:
@@ -19,9 +20,13 @@ def main() -> None:
         parser.print_help(sys.stderr)
         sys.exit(1)
 
+    # if args.version:
+    #     version = get_project_version()
+    #     print(f"update-pip-packages version: {version}")
+    #     sys.exit(0)
     if args.version:
-        version = get_project_version()
-        print(f"update-pip-packages version: {version}")
+        # version = get_project_version()
+        print(f"update-pip-packages version: {__version__}")
         sys.exit(0)
 
     if args.pip:
