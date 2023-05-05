@@ -2,6 +2,7 @@ import sys
 import json
 import urllib.request
 import subprocess
+from .utils import run_command
 
 
 def update_pip_packages() -> None:
@@ -38,16 +39,11 @@ def update_pip_packages() -> None:
     else:
         print("Updating pip packages...")
         for package in packages_to_update:
-            update_result = subprocess.run(
+            update_result = run_command(
                 [sys.executable, "-m", "pip", "install", "--upgrade", package],
-                check=False,
-                capture_output=False,
-                text=True,
             )
             if update_result.returncode == 0:
-                print(f"{package} updated successfully.")
+                print(f"{package} updated successfully.\n")
             else:
-                print(
-                    f"Error updating {package}. Return code: {update_result.returncode}"
-                )
+                print(f"Error updating {package}. Return {update_result.stderr}")
         print("Pip packages update completed.")
