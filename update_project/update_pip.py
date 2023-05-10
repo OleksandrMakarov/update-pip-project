@@ -43,5 +43,6 @@ def update_pip_packages() -> None:
                 [sys.executable, "-m", "pip", "install", "--upgrade", package],
                 success_msg=f"{package} updated successfully.",
                 error_msg=f"Error updating {package}.",
+                stdout=False
             )
         print("Pip packages update completed.")

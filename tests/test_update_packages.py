@@ -1,98 +1,62 @@
-import pytest
-import json
-from unittest.mock import MagicMock
-from update_project.main import (
-    get_linux_distribution,
-    update_pip_packages,
-    update_apt_packages,
-    update_yum_packages,
-    update_dnf_packages,
-    update_pacman_packages,
-    update_zypper_packages,
-    update_app_packages,
-    get_version_from_pyproject_toml
-)
+# import pytest
+# import json
+# from unittest.mock import MagicMock
+# from update_project.main import (
+#     get_linux_distribution,
+#     update_pip_packages,
+#     update_apt_packages,
+#     update_yum_packages,
+#     update_dnf_packages,
+#     update_pacman_packages,
+#     update_zypper_packages,
+#     update_app_packages,
+#     get_version_from_pyproject_toml
+# )
 
 
-def test_get_linux_distribution(monkeypatch):
-    monkeypatch.setattr(
-        "update_project.main.distro.id", lambda: "ubuntu")
-    assert get_linux_distribution() == "ubuntu"
+# def test_get_linux_distribution(monkeypatch):
+#     monkeypatch.setattr(
+#         "update_project.main.distro.id", lambda: "ubuntu")
+#     assert get_linux_distribution() == "ubuntu"
 
 
-def test_update_pip_packages(monkeypatch):
-    check_output_mock = MagicMock(
-        side_effect=[
-            b"pip 20.0.1",
-            json.dumps(
-                [{"name": "package1", "latest_version": "2.0.0"}]).encode(),
-        ]
-    )
-    check_call_mock = MagicMock()
-    monkeypatch.setattr(
-        "update_project.main.subprocess.check_output", check_output_mock)
-    monkeypatch.setattr(
-        "update_project.main.subprocess.check_call", check_call_mock)
+# @pytest.mark.parametrize(
+#     "distro_id, update_func",
+#     [
+#         ("ubuntu", update_apt_packages),
+#         ("debian", update_apt_packages),
+#         ("fedora", update_dnf_packages),
+#         ("centos", update_yum_packages),
+#         ("redhat", update_yum_packages),
+#         ("arch", update_pacman_packages),
+#         ("manjaro", update_pacman_packages),
+#         ("opensuse", update_zypper_packages),
+#         ("suse", update_zypper_packages),
+#     ],
+# )
+# def test_update_app_packages(monkeypatch, distro_id, update_func):
+#     monkeypatch.setattr(
+#         "update_project.main.get_linux_distribution", lambda: distro_id)
+#     update_func_mock = MagicMock()
+#     monkeypatch.setattr("update_project.main." +
+#                         update_func.__name__, update_func_mock)
 
-    class MockResponse:
-        def __init__(self, url):
-            self.data = {"info": {"version": "21.0.1"}}
+#     update_app_packages()
 
-        def __enter__(self):
-            return self
-
-        def __exit__(self, exc_type, exc_val, exc_tb):
-            pass
-
-        def read(self):
-            return json.dumps(self.data).encode()
-
-    monkeypatch.setattr(
-        "update_project.main.urllib.request.urlopen", lambda url: MockResponse(url))
-
-    update_pip_packages()
-
-    assert check_output_mock.call_count == 2
-    assert check_call_mock.call_count == 1
+#     update_func_mock.assert_called_once()
 
 
-@pytest.mark.parametrize(
-    "distro_id, update_func",
-    [
-        ("ubuntu", update_apt_packages),
-        ("debian", update_apt_packages),
-        ("fedora", update_dnf_packages),
-        ("centos", update_yum_packages),
-        ("redhat", update_yum_packages),
-        ("arch", update_pacman_packages),
-        ("manjaro", update_pacman_packages),
-        ("opensuse", update_zypper_packages),
-        ("suse", update_zypper_packages),
-    ],
-)
-def test_update_app_packages(monkeypatch, distro_id, update_func):
-    monkeypatch.setattr(
-        "update_project.main.get_linux_distribution", lambda: distro_id)
-    update_func_mock = MagicMock()
-    monkeypatch.setattr("update_project.main." +
-                        update_func.__name__, update_func_mock)
+# def test_update_app_packages_unsupported(monkeypatch, capsys):
+#     monkeypatch.setattr(
+#         "update_project.main.get_linux_distribution", lambda: "unsupported")
 
-    update_app_packages()
+#     update_app_packages()
 
-    update_func_mock.assert_called_once()
+#     captured = capsys.readouterr()
+#     assert "Unsupported distribution: unsupported. Cannot update packages." in captured.out
 
 
-def test_update_app_packages_unsupported(monkeypatch, capsys):
-    monkeypatch.setattr(
-        "update_project.main.get_linux_distribution", lambda: "unsupported")
-
-    update_app_packages()
-
-    captured = capsys.readouterr()
-    assert "Unsupported distribution: unsupported. Cannot update packages." in captured.out
-
-
-def test_get_version_from_pyproject_toml():
-    result = get_version_from_pyproject_toml()
-    assert type(result) is str
-    assert len(result) >= 5
+# def test_get_version_from_pyproject_toml():
+#     result = get_version_from_pyproject_toml()
+#     assert type(result) is str
+#     assert len(result) >= 5

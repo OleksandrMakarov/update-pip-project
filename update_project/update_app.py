@@ -1,22 +1,23 @@
 import subprocess
+# import sys
 from update_project.utils import get_linux_distribution
+from .utils import run_command
 
 
 def update_apt_packages() -> None:
     print("Updating apt packages...")
-    apt_update_result = subprocess.run(["sudo", "apt", "update"])
-    if apt_update_result.returncode == 0:
-        print("Apt update completed successfully.")
-    else:
-        print(
-            f"Apt update completed with errors. Return code: {apt_update_result.returncode}")
 
-    apt_upgrade_result = subprocess.run(["sudo", "apt", "upgrade", "-y"])
-    if apt_upgrade_result.returncode == 0:
-        print("Apt packages updated successfully.")
-    else:
-        print(
-            f"Apt packages update completed with errors. Return code: {apt_upgrade_result.returncode}")
+    run_command(
+        ["sudo", "apt", "update"],
+        success_msg="Apt update completed successfully",
+        error_msg="Apt update completed with errors.",
+    )
+
+    run_command(
+        ["sudo", "apt", "upgrade", "-y"],
+        success_msg="Apt packages updated successfully.",
+        error_msg="Apt packages update completed with errors.",
+    )
 
 
 def update_yum_packages() -> None:
@@ -26,7 +27,8 @@ def update_yum_packages() -> None:
         print("YUM packages updated successfully.")
     else:
         print(
-            f"YUM packages update completed with errors. Return code: {yum_update_result.returncode}")
+            f"YUM packages update completed with errors. Return code: {yum_update_result.returncode}"
+        )
 
 
 def update_dnf_packages() -> None:
@@ -36,18 +38,19 @@ def update_dnf_packages() -> None:
         print("DNF packages updated successfully.")
     else:
         print(
-            f"DNF packages update completed with errors. Return code: {dnf_update_result.returncode}")
+            f"DNF packages update completed with errors. Return code: {dnf_update_result.returncode}"
+        )
 
 
 def update_pacman_packages() -> None:
     print("Updating Pacman packages...")
-    pacman_update_result = subprocess.run(
-        ["sudo", "pacman", "-Syu", "--noconfirm"])
+    pacman_update_result = subprocess.run(["sudo", "pacman", "-Syu", "--noconfirm"])
     if pacman_update_result.returncode == 0:
         print("Pacman packages updated successfully.")
     else:
         print(
-            f"Pacman packages update completed with errors. Return code: {pacman_update_result.returncode}")
+            f"Pacman packages update completed with errors. Return code: {pacman_update_result.returncode}"
+        )
 
 
 def update_zypper_packages() -> None:
@@ -57,14 +60,16 @@ def update_zypper_packages() -> None:
         print("Zypper repositories refreshed successfully.")
     else:
         print(
-            f"Zypper repositories refresh completed with errors. Return code: {zypper_update_result.returncode}")
+            f"Zypper repositories refresh completed with errors. Return code: {zypper_update_result.returncode}"
+        )
 
     zypper_upgrade_result = subprocess.run(["sudo", "zypper", "update", "-y"])
     if zypper_upgrade_result.returncode == 0:
         print("Zypper packages updated successfully.")
     else:
         print(
-            f"Zypper packages update completed with errors. Return code: {zypper_upgrade_result.returncode}")
+            f"Zypper packages update completed with errors. Return code: {zypper_upgrade_result.returncode}"
+        )
 
 
 def update_app_packages() -> None:
@@ -81,5 +86,4 @@ def update_app_packages() -> None:
     elif distro_id.lower() in ("opensuse", "suse"):
         update_zypper_packages()
     else:
-        print(
-            f"Unsupported distribution: {distro_id}. Cannot update packages.")
+        print(f"Unsupported distribution: {distro_id}. Cannot update packages.")
