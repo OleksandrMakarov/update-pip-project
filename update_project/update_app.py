@@ -1,5 +1,8 @@
+import os
 import subprocess
+
 # import sys
+
 from update_project.utils import get_linux_distribution
 from .utils import run_command
 
@@ -7,14 +10,24 @@ from .utils import run_command
 def update_apt_packages() -> None:
     print("Updating apt packages...")
 
+    # Проверяем, доступен ли sudo
+    sudo_available = os.system("command -v sudo > /dev/null") == 0
+
+    if sudo_available:
+        update_command = ["sudo", "apt", "update"]
+        upgrade_command = ["sudo", "apt", "upgrade", "-y"]
+    else:
+        update_command = ["apt", "update"]
+        upgrade_command = ["apt", "upgrade", "-y"]
+
     run_command(
-        ["sudo", "apt", "update"],
+        update_command,
         success_msg="Apt update completed successfully",
         error_msg="Apt update completed with errors.",
     )
 
     run_command(
-        ["sudo", "apt", "upgrade", "-y"],
+        upgrade_command,
         success_msg="Apt packages updated successfully.",
         error_msg="Apt packages update completed with errors.",
     )
