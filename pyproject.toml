@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "update-pip-packages"
-version = "0.1.5.6"
+version = "0.1.5"
 description = ""
 authors = ["OleksandrMakarov"]
 readme = "README.md"

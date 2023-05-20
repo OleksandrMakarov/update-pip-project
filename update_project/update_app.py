@@ -10,7 +10,6 @@ from .utils import run_command
 def update_apt_packages() -> None:
     print("Updating apt packages...")
 
-    # Проверяем, доступен ли sudo
     sudo_available = os.system("command -v sudo > /dev/null") == 0
 
     if sudo_available:
@@ -35,13 +34,19 @@ def update_apt_packages() -> None:
 
 def update_yum_packages() -> None:
     print("Updating YUM packages...")
-    yum_update_result = subprocess.run(["sudo", "yum", "update", "-y"])
-    if yum_update_result.returncode == 0:
-        print("YUM packages updated successfully.")
+
+    sudo_available = os.system("command -v sudo > /dev/null") == 0
+
+    if sudo_available:
+        update_command = ["sudo", "yum", "update", "-y"]
     else:
-        print(
-            f"YUM packages update completed with errors. Return code: {yum_update_result.returncode}"
-        )
+        update_command = ["yum", "update", "-y"]
+
+    run_command(
+        update_command,
+        success_msg="YUM packages updated successfully.",
+        error_msg="YUM packages update completed with errors.",
+    )
 
 
 def update_dnf_packages() -> None:
