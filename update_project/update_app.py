@@ -105,17 +105,17 @@ def update_zypper_packages() -> None:
 
 
 def update_app_packages() -> None:
-    distro_id = get_linux_distribution()
+    distro_id = get_linux_distribution().lower()
 
-    if distro_id.lower() in ("ubuntu", "debian"):
+    if any(name in distro_id for name in ("ubuntu", "debian")):
         update_apt_packages()
-    elif distro_id.lower() in ("fedora", "centos9"):
+    elif any(name in distro_id for name in ("fedora", "centos9")):
         update_dnf_packages()
-    elif distro_id.lower() in ("centos7", "centos8", "redhat"):
+    elif any(name in distro_id for name in ("centos7", "centos8", "redhat")):
         update_yum_packages()
-    elif distro_id.lower() in ("arch", "manjaro"):
+    elif any(name in distro_id for name in ("arch", "manjaro")):
         update_pacman_packages()
-    elif distro_id.lower() in ("opensuse", "suse"):
+    elif any(name in distro_id for name in ("opensuse", "suse")):
         update_zypper_packages()
     else:
         print(f"Unsupported distribution: {distro_id}. Cannot update packages.")
