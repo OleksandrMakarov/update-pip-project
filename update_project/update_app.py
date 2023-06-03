@@ -1,8 +1,4 @@
 import os
-import subprocess
-
-# import sys
-
 from update_project.utils import get_linux_distribution
 from .utils import run_command
 
@@ -51,43 +47,61 @@ def update_yum_packages() -> None:
 
 def update_dnf_packages() -> None:
     print("Updating DNF packages...")
-    dnf_update_result = subprocess.run(["sudo", "dnf", "upgrade", "-y"])
-    if dnf_update_result.returncode == 0:
-        print("DNF packages updated successfully.")
+
+    sudo_available = os.system("command -v sudo > /dev/null") == 0
+
+    if sudo_available:
+        update_command = ["sudo", "dnf", "upgrade", "-y"]
     else:
-        print(
-            f"DNF packages update completed with errors. Return code: {dnf_update_result.returncode}"
-        )
+        update_command = ["dnf", "upgrade", "-y"]
+
+    run_command(
+        update_command,
+        success_msg="DNF packages updated successfully.",
+        error_msg="DNF packages update completed with errors.",
+    )
 
 
 def update_pacman_packages() -> None:
     print("Updating Pacman packages...")
-    pacman_update_result = subprocess.run(["sudo", "pacman", "-Syu", "--noconfirm"])
-    if pacman_update_result.returncode == 0:
-        print("Pacman packages updated successfully.")
+
+    sudo_available = os.system("command -v sudo > /dev/null") == 0
+
+    if sudo_available:
+        update_command = ["sudo", "pacman", "-Syu", "--noconfirm"]
     else:
-        print(
-            f"Pacman packages update completed with errors. Return code: {pacman_update_result.returncode}"
-        )
+        update_command = ["pacman", "-Syu", "--noconfirm"]
+
+    run_command(
+        update_command,
+        success_msg="Pacman packages updated successfully.",
+        error_msg="Pacman packages update completed with errors.",
+    )
 
 
 def update_zypper_packages() -> None:
     print("Updating Zypper packages...")
-    zypper_update_result = subprocess.run(["sudo", "zypper", "refresh"])
-    if zypper_update_result.returncode == 0:
-        print("Zypper repositories refreshed successfully.")
-    else:
-        print(
-            f"Zypper repositories refresh completed with errors. Return code: {zypper_update_result.returncode}"
-        )
 
-    zypper_upgrade_result = subprocess.run(["sudo", "zypper", "update", "-y"])
-    if zypper_upgrade_result.returncode == 0:
-        print("Zypper packages updated successfully.")
+    sudo_available = os.system("command -v sudo > /dev/null") == 0
+
+    if sudo_available:
+        refresh_command = ["sudo", "zypper", "refresh"]
+        update_command = ["sudo", "zypper", "update", "-y"]
     else:
-        print(
-            f"Zypper packages update completed with errors. Return code: {zypper_upgrade_result.returncode}"
-        )
+        refresh_command = ["zypper", "refresh"]
+        update_command = ["zypper", "update", "-y"]
+
+    run_command(
+        refresh_command,
+        success_msg="Zypper repositories refreshed successfully.",
+        error_msg="Zypper repositories refresh completed with errors.",
+    )
+
+    run_command(
+        update_command,
+        success_msg="Zypper packages updated successfully.",
+        error_msg="Zypper packages update completed with errors.",
+    )
 
 
 def update_app_packages() -> None:
