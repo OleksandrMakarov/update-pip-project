@@ -3,7 +3,7 @@ import distro
 
 
 def get_linux_distribution():
-    return distro.id()
+    return f"{distro.id()}{distro.version()}"
 
 
 def run_command(args, success_msg, error_msg, stdout=True):

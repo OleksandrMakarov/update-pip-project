@@ -109,9 +109,9 @@ def update_app_packages() -> None:
 
     if distro_id.lower() in ("ubuntu", "debian"):
         update_apt_packages()
-    elif distro_id.lower() in ("fedora"):
+    elif distro_id.lower() in ("fedora", "centos9"):
         update_dnf_packages()
-    elif distro_id.lower() in ("centos", "redhat"):
+    elif distro_id.lower() in ("centos7", "centos8", "redhat"):
         update_yum_packages()
     elif distro_id.lower() in ("arch", "manjaro"):
         update_pacman_packages()
